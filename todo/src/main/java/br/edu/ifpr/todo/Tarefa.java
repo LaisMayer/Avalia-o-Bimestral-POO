@@ -1,6 +1,7 @@
 package br.edu.ifpr.todo;
 
 import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,18 +13,25 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tarefas")
 public class Tarefa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     private String nome;
     private String descricao;
+
     @Enumerated(EnumType.STRING)
     private TodoStatus status = TodoStatus.A_FAZER;
-    private LocalDate dataCriacao;
+
+    private LocalDate dataCriacao = LocalDate.now();
     private LocalDate dataEntrega;
     private Boolean importante = false;
 
+    public Tarefa() {
+    }
+
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -79,9 +87,4 @@ public class Tarefa {
     public void setImportante(Boolean importante) {
         this.importante = importante;
     }
-
-    public Tarefa() {
-        
-    }
-
 }

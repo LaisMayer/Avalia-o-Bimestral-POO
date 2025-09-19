@@ -1,49 +1,42 @@
+package br.edu.ifpr.todo;
 
-// package br.edu.ifpr.todo;
-// import br.edu.ifpr.todo.api.dto.TarefaRequest;
-// import br.edu.ifpr.todo.domain.model.Tarefa;
-// import br.edu.ifpr.todo.domain.model.TodoStatus;
-// import br.edu.ifpr.todo.domain.repository.TarefaRepository;
-// import br.edu.ifpr.todo.api.exception.ResourceNotFoundException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class TarefaService {
+
     private final TarefaRepository repo;
 
     public TarefaService(TarefaRepository repo) {
         this.repo = repo;
     }
 
-public List<Tarefa> listar(String q, TodoStatus status, Boolean
-importante, LocalDate ate) {
-// Filtro simples combinando alguns critérios básicos
-if (q != null && !q.isBlank()) {
-return repo.findByNomeContainingIgnoreCase(q);
-}
-if (status != null && Boolean.TRUE.equals(importante)) {
-return repo.findByStatusAndImportanteTrue(status);
-}
-if (status != null) {
-    return repo.findByStatus(status);
-}
-if (Boolean.TRUE.equals(importante)) {
-return repo.findByImportanteTrue();
-}
-if (ate != null) {
-return repo.findByDataEntregaBefore(ate.plusDays(1)); // inclui o
-dia
-}
-return repo.findAll();
-}
+    public List<Tarefa> listar(String q, TodoStatus status, Boolean importante, LocalDate ate) {
+        if (q != null && !q.isBlank()) {
+            return repo.findByNomeContainingIgnoreCase(q);
+        }
+        if (status != null && Boolean.TRUE.equals(importante)) {
+            return repo.findByStatusAndImportanteTrue(status);
+        }
+        if (status != null) {
+            return repo.findByStatus(status);
+        }
+        if (Boolean.TRUE.equals(importante)) {
+            return repo.findByImportanteTrue();
+        }
+        if (ate != null) {
+            return repo.findByDataEntregaBefore(ate.plusDays(1));
+        }
+        return repo.findAll();
+    }
 
     public Tarefa buscarPorId(Long id) {
         return repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tarefa id="
-                        + id + " não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Tarefa id=" + id + " não encontrada"));
     }
 
     @Transactional
@@ -62,12 +55,19 @@ return repo.findAll();
         Tarefa t = buscarPorId(id);
         t.setNome(dto.getNome());
         t.setDescricao(dto.getDescricao());
-        if (dto.getStatus() != null)
+        if (dto.getStatus() != null) {
             t.setStatus(dto.getStatus());
+        }
         t.setDataEntrega(dto.getDataEntrega());
-        if (dto.getImportante() != null)
+        if (dto.getImportante() != null) {
             t.setImportante(dto.getImportante());
+        }
         return repo.save(t);
     }
 
+    @Transactional
+    public void remover(Long id) {
+        Tarefa t = buscarPorId(id);
+        repo.delete(t);
+    }
 }
