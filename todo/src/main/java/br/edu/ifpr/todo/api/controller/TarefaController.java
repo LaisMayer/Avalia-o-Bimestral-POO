@@ -1,4 +1,4 @@
-package br.edu.ifpr.todo;
+package br.edu.ifpr.todo.api.controller;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpr.todo.api.dto.TarefaRequest;
+import br.edu.ifpr.todo.api.dto.TarefaResponse;
+import br.edu.ifpr.todo.domain.model.Tarefa;
+import br.edu.ifpr.todo.domain.model.TodoStatus;
+import br.edu.ifpr.todo.domain.service.TarefaService;
 import jakarta.validation.Valid;
 
 @RestController

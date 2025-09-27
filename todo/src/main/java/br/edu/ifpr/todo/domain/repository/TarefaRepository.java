@@ -1,9 +1,11 @@
-package br.edu.ifpr.todo;
-
+package br.edu.ifpr.todo.domain.repository;
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.edu.ifpr.todo.domain.model.Tarefa;
+import br.edu.ifpr.todo.domain.model.TodoStatus;
 
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 

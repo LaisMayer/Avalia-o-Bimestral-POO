@@ -1,10 +1,16 @@
-package br.edu.ifpr.todo;
+package br.edu.ifpr.todo.domain.service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.edu.ifpr.todo.api.dto.TarefaRequest;
+import br.edu.ifpr.todo.api.exception.ResourceNotFoundException;
+import br.edu.ifpr.todo.domain.model.Tarefa;
+import br.edu.ifpr.todo.domain.model.TodoStatus;
+import br.edu.ifpr.todo.domain.repository.TarefaRepository;
 
 @Service
 public class TarefaService {

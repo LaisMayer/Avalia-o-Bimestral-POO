@@ -1,4 +1,4 @@
-package br.edu.ifpr.todo;
+package br.edu.ifpr.todo.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

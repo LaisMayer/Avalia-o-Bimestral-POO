@@ -1,4 +1,4 @@
-package br.edu.ifpr.todo;
+package br.edu.ifpr.todo.api.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

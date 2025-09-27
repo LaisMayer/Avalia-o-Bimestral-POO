@@ -1,4 +1,4 @@
-package br.edu.ifpr.todo;
+package br.edu.ifpr.todo.domain.model;
 
 import java.time.LocalDate;
 
